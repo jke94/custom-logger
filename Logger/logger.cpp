@@ -2,16 +2,6 @@
 
 std::mutex mtx;
 
-Logger *Logger::get_instance()
-{
-    if(_logger == nullptr)
-    {
-        return new Logger();
-    }
-
-    return _logger;
-}
-
 Logger::Logger()
 {
 }
@@ -71,7 +61,7 @@ std::string Logger::date_and_time()
 }
 
 
-std::string LoggerLevelToStr(LoggerLevel level)
+std::string Logger::LoggerLevelToStr(LoggerLevel level)
 {
     std::string value = "";
 
