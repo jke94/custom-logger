@@ -3,7 +3,10 @@
 #ifndef __CUSTOMLOGGER_H__
 #define __CUSTOMLOGGER_H__
 
+#include <cstring>
 #include <string>
+
+#define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
 
 typedef void (*INIT_LOGGER)(std::string msg);
 typedef void (*END_LOGGER)();
@@ -48,11 +51,11 @@ extern "C"
 void init_logger(std::string log_file_name);
 void end_logger();
 
-#define WRITE_TRACE(msg) log_trace( __FILE__, __FUNCTION__, __LINE__ , msg)
-#define WRITE_INFO(msg) log_info(__FILE__, __FUNCTION__, __LINE__ , msg)
-#define WRITE_WARNING(msg) log_warning(__FILE__, __FUNCTION__, __LINE__ , msg)
-#define WRITE_ERROR(msg) log_error(__FILE__, __FUNCTION__, __LINE__ , msg)
-#define WRITE_CRITICAL(msg) log_critical(__FILE__, __FUNCTION__, __LINE__ , msg)
+#define WRITE_TRACE(msg) log_trace( __FILENAME__, __FUNCTION__, __LINE__ , msg)
+#define WRITE_INFO(msg) log_info(__FILENAME__, __FUNCTION__, __LINE__ , msg)
+#define WRITE_WARNING(msg) log_warning(__FILENAME__, __FUNCTION__, __LINE__ , msg)
+#define WRITE_ERROR(msg) log_error(__FILENAME__, __FUNCTION__, __LINE__ , msg)
+#define WRITE_CRITICAL(msg) log_critical(__FILENAME__, __FUNCTION__, __LINE__ , msg)
 
 #ifdef  __cplusplus
 }

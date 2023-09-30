@@ -78,19 +78,19 @@ std::string Logger::logger_level_to_str(LoggerLevel level)
     switch (level)
     {
         case LoggerLevel::TRACE:
-            value = "TRACE";
+            value = "[TRACE]";
             break;
         case LoggerLevel::INFO:
-            value = "INFO";
+            value = "[INFO]";
             break;
         case LoggerLevel::WARNING:
-            value = "WARNING";
+            value = "[WARNING]";
             break;
         case LoggerLevel::ERROR:
-            value = "ERROR";
+            value = "[ERROR]";
             break;
         case LoggerLevel::CRITICAL:
-            value = "CRITICAL";
+            value = "[CRITICAL]";
             break;
         default:
             break;
