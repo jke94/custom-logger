@@ -23,16 +23,17 @@ class Logger : public ILogger
     private:
 
         std::string date_and_time();
-        void log(std::string msg, LoggerLevel level);
+        void log(const char* file, const char* function, const int line, const std::string& msg, LoggerLevel level);
         std::string LoggerLevelToStr(LoggerLevel level);
 
     public:
 
         Logger();
         ~Logger();
-        void log_trace(std::string msg);
-        void log_info(std::string msg);
-        void log_warning(std::string msg);
-        void log_error(std::string msg);
-        void log_critical(std::string msg);
+        
+        void log_trace(const char* file, const char* function, const int line, const std::string& msg);
+        void log_info(const char* file, const char* function, const int line, const std::string& msg);
+        void log_warning(const char* file, const char* function, const int line, const std::string& msg);
+        void log_error(const char* file, const char* function, const int line, const std::string& msg);
+        void log_critical(const char* file, const char* function, const int line, const std::string& msg);
 };
