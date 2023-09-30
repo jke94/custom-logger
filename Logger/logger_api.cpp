@@ -2,7 +2,7 @@
 #include "logger.h"
 
 
-ILogger* logger = new Logger;
+ILogger* logger = new Logger("application.log");
 
 void log_trace(const char* file, const char* function, const int line, const std::string& msg)
 {

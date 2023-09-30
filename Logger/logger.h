@@ -22,13 +22,14 @@ class Logger : public ILogger
 {
     private:
 
+        std::string log_file_name_;
         std::string date_and_time();
+        std::string logger_level_to_str(LoggerLevel level);
         void log(const char* file, const char* function, const int line, const std::string& msg, LoggerLevel level);
-        std::string LoggerLevelToStr(LoggerLevel level);
 
     public:
 
-        Logger();
+        Logger(std::string log_file_name);
         ~Logger();
         
         void log_trace(const char* file, const char* function, const int line, const std::string& msg);
