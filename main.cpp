@@ -31,18 +31,27 @@ void write_log_critical(std::string msg)
 
 int main()
 {
-    // TODO: Investigate if it make sense load dll.
-
-    // void* handle = dlopen("libdemologger.so", RTLD_LAZY);
+    void* handle = dlopen("libdemologger.so", RTLD_LAZY);
     
-    // std::cout << "Handle: " << handle << std::endl;
+    std::cout << "Handle: " << handle << std::endl;
 
-    // if (!handle) 
-    // {
-    //     std::cout << "Could not open the library 'libdemologger.so'" << std::endl;
+    if (!handle) 
+    {
+        std::cout << "Could not open the library 'libdemologger.so'" << std::endl;
 
-    //     return -1;
-    // }
+        return -1;
+    }
+
+    INIT_LOGGER init_logger = reinterpret_cast<INIT_LOGGER>(dlsym(handle, "init_logger"));
+    END_LOGGER end_logger = reinterpret_cast<END_LOGGER>(dlsym(handle, "end_logger"));
+
+    if(!init_logger && !end_logger)
+    {
+        std::cout << "Error in load function." << std::endl;
+        return -2;
+    }
+
+    init_logger("application_2.log");
 
     WRITE_TRACE("Hello Javi! Come on!");
     
@@ -82,9 +91,9 @@ int main()
   
     WRITE_TRACE("END!");
 
-    // TODO: Investigate if it make sense load dll.
+    end_logger();
 
-    // dlclose(handle);
+    dlclose(handle);
 
     return 0;
 }

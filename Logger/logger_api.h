@@ -5,11 +5,8 @@
 
 #include <string>
 
-// typedef void (*LOG_TRACE)(std::string msg);
-// typedef void (*LOG_INFO)(std::string msg);
-// typedef void (*LOG_WARNING)(std::string msg);
-// typedef void (*LOG_ERROR)(std::string msg);
-// typedef void (*LOG_CRITICAL)(std::string msg);
+typedef void (*INIT_LOGGER)(std::string msg);
+typedef void (*END_LOGGER)();
 
 void log_trace(const char* file, const char* function, const int line, const std::string& msg);
 void log_info(const char* file, const char* function, const int line, const std::string& msg);
@@ -22,6 +19,8 @@ void log_critical(const char* file, const char* function, const int line, const 
 extern "C" 
 {
 #endif
+
+// TODO: Investigate set logger level traces.
 
 // #define WRITE_TRACE         0x00
 // #define WRITE_INFO          0x01
@@ -45,6 +44,9 @@ extern "C"
 // #else
 //     #define WRITE_INFO(msg)
 // #endif
+
+void init_logger(std::string log_file_name);
+void end_logger();
 
 #define WRITE_TRACE(msg) log_trace( __FILE__, __FUNCTION__, __LINE__ , msg)
 #define WRITE_INFO(msg) log_info(__FILE__, __FUNCTION__, __LINE__ , msg)
