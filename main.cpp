@@ -33,7 +33,7 @@ int main()
 
     log_trace("Hello Javi! Come on!");
 
-    const int n_threads = 800;
+    const int n_threads = 100;
     std::thread threads [n_threads] = {};
 
     log_trace("START!");
