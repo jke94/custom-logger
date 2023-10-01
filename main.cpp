@@ -1,25 +1,39 @@
-/**
- * How to compile: 
- * 
- *      g++ main.cpp -std=c++20 -o main
- * 
-*/
-#include "loggerAPI.h"
+#include "logger_api.h"
+
 #include <iostream>
+#include <thread>
 #include <dlfcn.h>
 
-// typedef void (*LOG_TRACE)(std::string msg);
-typedef void (*LOG_TRACE)(const char*);
-// typedef void (*LOG_INFO)(std::string msg);
-// typedef void (*LOG_WARNING)(std::string msg);
-// typedef void (*LOG_ERROR)(std::string msg);
-// typedef void (*LOG_CRITICAL)(std::string msg);
+void write_log_trace(std::string msg)
+{
+    WRITE_TRACE(msg);
+}
+
+void write_log_info(std::string msg)
+{
+    WRITE_INFO(msg);
+}
+
+void write_log_warning(std::string msg)
+{
+    WRITE_WARNING(msg);
+}
+
+void write_log_error(std::string msg)
+{
+    WRITE_ERROR(msg);
+}
+
+void write_log_critical(std::string msg)
+{
+    WRITE_CRITICAL(msg);
+}
 
 int main()
 {
-    void* handle = dlopen("/home/javi/Repositories/custom-logger/build/libdemologger.so", RTLD_LAZY);
+    void* handle = dlopen("libdemologger.so", RTLD_LAZY);
     
-    std::cout << handle << std::endl;
+    std::cout << "Handle: " << handle << std::endl;
 
     if (!handle) 
     {
@@ -28,41 +42,56 @@ int main()
         return -1;
     }
 
-    LOG_TRACE log_trace = reinterpret_cast<LOG_TRACE>(dlsym(handle, "log_trace"));
+    INIT_LOGGER init_logger = reinterpret_cast<INIT_LOGGER>(dlsym(handle, "init_logger"));
+    END_LOGGER end_logger = reinterpret_cast<END_LOGGER>(dlsym(handle, "end_logger"));
 
-    // const int n_threads = 500;
-    // std::thread threads [n_threads] = {};
+    if(!init_logger && !end_logger)
+    {
+        std::cout << "Error in load function." << std::endl;
+        return -2;
+    }
 
-    // for(int i=0; i<n_threads; i++)
-    // {
-    //     if(i % 2 == 0)
-    //     {
-    //         threads[i] = std::thread(log_trace, "[THREAD] " + std::to_string(i) + ": asdasd");
-    //     }
-    //     // else if (i % 3 == 0)
-    //     // {
-    //     //     threads[i] = std::thread(logger_info, "[THREAD] " + std::to_string(i) + ": asdasd");
-    //     // }
-    //     // else if (i % 5 == 0)
-    //     // {
-    //     //     threads[i] = std::thread(logger_warning, "[THREAD] " + std::to_string(i) + ": asdasd");
-    //     // }
-    //     // else if (i % 7 == 0)
-    //     // {
-    //     //     threads[i] = std::thread(logger_error, "[THREAD] " + std::to_string(i) + ": asdasd");
-    //     // }
-    //     // else
-    //     // {
-    //     //     threads[i] = std::thread(logger_critical, "[THREAD] " + std::to_string(i) + ": asdasd");
-    //     // } 
-    // }
+    init_logger("application_2.log");
 
-    // for(int i=0; i<n_threads; i++)
-    // {
-    //     threads[i].join();
-    // }
+    WRITE_TRACE("Hello Javi! Come on!");
+    
+    const int n_threads = 100;
+    std::thread threads [n_threads] = {};
+
+    WRITE_TRACE("START!");
+
+    for(int i=0; i<n_threads; i++)
+    {
+        if(i % 2 == 0)
+        {
+            threads[i] = std::thread(write_log_trace, "[THREAD] " + std::to_string(i) + ": A simple trace message.");
+        }
+        else if (i % 3 == 0)
+        {
+            threads[i] = std::thread(write_log_info, "[THREAD] " + std::to_string(i) + ": A simple info message");
+        }
+        else if (i % 5 == 0)
+        {
+            threads[i] = std::thread(write_log_warning, "[THREAD] " + std::to_string(i) + ": A simple info message");
+        }
+        else if (i % 7 == 0)
+        {
+            threads[i] = std::thread(write_log_error, "[THREAD] " + std::to_string(i) + ": A simple info message");
+        }
+        else
+        {
+            threads[i] = std::thread(write_log_critical, "[THREAD] " + std::to_string(i) + ": A simple info message");
+        }
+    }
+
+    for(int i=0; i<n_threads; i++)
+    {
+        threads[i].join();
+    }
   
-    // log_trace("END!");
+    WRITE_TRACE("END!");
+
+    end_logger();
 
     dlclose(handle);
 

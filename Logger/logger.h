@@ -5,7 +5,9 @@
 #include <mutex>
 #include <thread>
 #include <fstream>
-#include "loggerAPI.h"
+
+#include "ILogger.h"
+#include "logger_api.h"
 
 enum LoggerLevel 
 {
@@ -16,33 +18,23 @@ enum LoggerLevel
     CRITICAL
 };
 
-class ILogger
-{
-    public:
-        virtual void log_trace(std::string msg) = 0;
-        virtual void log_info(std::string msg) = 0;
-        virtual void log_warning(std::string msg) = 0;
-        virtual void log_error(std::string msg) = 0;
-        virtual void log_critical(std::string msg) = 0;
-};
-
 class Logger : public ILogger
 {
     private:
-        static Logger* _logger;
-        Logger();
+
+        std::string log_file_name_;
         std::string date_and_time();
-        void log(std::string msg, LoggerLevel level);
+        std::string logger_level_to_str(LoggerLevel level);
+        void log(const char* file, const char* function, const int line, const std::string& msg, LoggerLevel level);
 
     public:
-        
-        static Logger* get_instance();
-        ~Logger();
-        void log_trace(std::string msg);
-        void log_info(std::string msg);
-        void log_warning(std::string msg);
-        void log_error(std::string msg);
-        void log_critical(std::string msg);
-};
 
-std::string LoggerLevelToStr(LoggerLevel level);
+        Logger(std::string log_file_name);
+        ~Logger();
+        
+        void log_trace(const char* file, const char* function, const int line, const std::string& msg);
+        void log_info(const char* file, const char* function, const int line, const std::string& msg);
+        void log_warning(const char* file, const char* function, const int line, const std::string& msg);
+        void log_error(const char* file, const char* function, const int line, const std::string& msg);
+        void log_critical(const char* file, const char* function, const int line, const std::string& msg);
+};
