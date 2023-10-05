@@ -2,9 +2,6 @@
 
 LoggerFilter::LoggerFilter()
 {
-    std::cout << log_level_ << std::endl;
-    log_level_ = LoggerLevel::TRACE | LoggerLevel::INFO;
-    std::cout << log_level_ << std::endl;
 }
 
 LoggerFilter::~LoggerFilter()
@@ -13,24 +10,23 @@ LoggerFilter::~LoggerFilter()
 
 bool LoggerFilter::apply_filter()
 {
-    if (log_level_ & LoggerLevel::TRACE)
-    {
-        std::cout <<"TRACE" << std::endl;
-        return true;
-    }
-    if (log_level_ & LoggerLevel::INFO)
+    if ((log_level_ & LoggerLevel::TRACE) == LoggerLevel::TRACE)
     {
         return true;
     }
-    if (log_level_ & LoggerLevel::WARNING)
+    if ((log_level_ & LoggerLevel::INFO) == LoggerLevel::INFO)
     {
         return true;
     }
-    if (log_level_ & LoggerLevel::ERROR)
+    if ((log_level_ & LoggerLevel::WARNING) == LoggerLevel::WARNING)
     {
         return true;
     }
-    if (log_level_ & LoggerLevel::CRITICAL)
+    if ((log_level_ & LoggerLevel::ERROR) == LoggerLevel::ERROR)
+    {
+        return true;
+    }
+    if ((log_level_ & LoggerLevel::CRITICAL) == LoggerLevel::CRITICAL)
     {
         return true;
     }

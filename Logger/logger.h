@@ -16,7 +16,6 @@ class Logger : public ILogger
 
         std::string log_file_name_;
         ILoggerFilter* logger_filter_ = nullptr;
-        uint16_t log_level_ = 0;
 
         std::string date_and_time();
         std::string logger_level_to_str(uint16_t log_level);
