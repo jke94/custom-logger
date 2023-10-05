@@ -8,24 +8,19 @@
 
 #include "ILogger.h"
 #include "logger_api.h"
-
-enum LoggerLevel 
-{
-    TRACE,
-    INFO,
-    WARNING,
-    ERROR,
-    CRITICAL
-};
+#include "loggerFilter.h"
 
 class Logger : public ILogger
 {
     private:
 
         std::string log_file_name_;
+        ILoggerFilter* logger_filter_ = nullptr;
+        uint16_t log_level_ = 0;
+
         std::string date_and_time();
-        std::string logger_level_to_str(LoggerLevel level);
-        void log(const char* file, const char* function, const int line, const std::string& msg, LoggerLevel level);
+        std::string logger_level_to_str(uint16_t log_level);
+        void log(const char* file, const char* function, const int line, const std::string& msg, uint16_t log_level);
 
     public:
 

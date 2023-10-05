@@ -5,10 +5,12 @@ std::mutex mtx;
 Logger::Logger(std::string log_file_name)
 {
     log_file_name_ = log_file_name;
+    logger_filter_ = new LoggerFilter();
 }
 
 Logger::~Logger()
 {
+    delete(logger_filter_);
 }
 
 void Logger::log_trace(const char* file, const char* function, const int line, const std::string& msg)
@@ -36,23 +38,32 @@ void Logger::log_critical(const char* file, const char* function, const int line
     log(file, function, line, msg, LoggerLevel::CRITICAL);
 }
 
-void Logger::log(const char* file, const char* function, const int line, const std::string& msg, LoggerLevel level)
+void Logger::log(const char* file, const char* function, const int line, const std::string& msg, uint16_t log_level)
 {
     mtx.lock();
 
-    std::string tmp_file(file);
-    std::string tmp_function(function);
-    std::string temp_msg = "[" + tmp_file  + ":" + tmp_function + ":" + std::to_string(line) + "] " + msg;
+    auto apply_filter = logger_filter_->apply_filter();
 
-    std::ofstream myfile;
-    
-    myfile.open(log_file_name_, std::ios_base::app);
-    
-    myfile << date_and_time() << " | " << 
-    logger_level_to_str(level) << " | " << 
-    temp_msg << "\n";
+    std::cout << "apply_filter: " << apply_filter << ", log_level: " << log_level << std::endl; // Trace for debugging.
 
-    myfile.close();
+    if(apply_filter)
+    {
+        std::string tmp_file(file);
+        std::string tmp_function(function);
+        std::string temp_msg = "[" + tmp_file  + ":" + tmp_function + ":" + std::to_string(line) + "] " + msg;
+
+        std::ofstream myfile;
+        
+        myfile.open(log_file_name_, std::ios_base::app);
+        
+        myfile << date_and_time() << " | " << 
+        logger_level_to_str(log_level) << " | " << 
+        temp_msg << "\n";
+        
+        // std::cout <<log_level << std::endl; // Trace for debugging.
+        
+        myfile.close();
+    }
 
     mtx.unlock();
 }
@@ -71,11 +82,11 @@ std::string Logger::date_and_time()
 }
 
 
-std::string Logger::logger_level_to_str(LoggerLevel level)
+std::string Logger::logger_level_to_str(uint16_t log_level)
 {
     std::string value = "";
 
-    switch (level)
+    switch (log_level)
     {
         case LoggerLevel::TRACE:
             value = "[TRACE]";

@@ -9,12 +9,16 @@ file(GLOB_RECURSE LOGGER_SRC_FILES RELATIVE
     ${CMAKE_SOURCE_DIR} "Logger/*.cpp"
 )
 
+file(GLOB_RECURSE CLIENT_SRC_FILES RELATIVE 
+    ${CMAKE_SOURCE_DIR} "Client/*.cpp"
+)
+
 include_directories(
     Logger
 )
 
 add_library(demologger SHARED ${LOGGER_SRC_FILES})
 
-add_executable(main main.cpp)
+add_executable(main ${CLIENT_SRC_FILES})
 
 target_link_libraries(main demologger)

@@ -1,33 +1,8 @@
-#include "logger_api.h"
-
 #include <iostream>
 #include <thread>
 #include <dlfcn.h>
 
-void write_log_trace(std::string msg)
-{
-    WRITE_TRACE(msg);
-}
-
-void write_log_info(std::string msg)
-{
-    WRITE_INFO(msg);
-}
-
-void write_log_warning(std::string msg)
-{
-    WRITE_WARNING(msg);
-}
-
-void write_log_error(std::string msg)
-{
-    WRITE_ERROR(msg);
-}
-
-void write_log_critical(std::string msg)
-{
-    WRITE_CRITICAL(msg);
-}
+#include "wrapper_lib_api.h"
 
 int main()
 {
@@ -56,9 +31,11 @@ int main()
     WRITE_TRACE("Hello Javi! Come on!");
     
     const int n_threads = 100;
-    std::thread threads [n_threads] = {};
+    std::thread threads[n_threads] = {};
 
     WRITE_TRACE("START!");
+
+    WRITE_LOG_TRACE("YUJUUUU!");
 
     for(int i=0; i<n_threads; i++)
     {

@@ -446,3 +446,6 @@ _deps
 
 # Exe files
 main
+
+# Visual Studio Code Settings Folder
+.vscode/
