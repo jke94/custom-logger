@@ -1,6 +1,6 @@
 #include <iostream>
 
-enum LoggerLevel : int
+enum LoggerLevel : uint16_t
 {
     TRACE       = 0x0001,   // 2^0      1
     INFO        = 0x0002,   // 2^1      2

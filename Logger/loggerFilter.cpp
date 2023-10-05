@@ -8,28 +8,33 @@ LoggerFilter::~LoggerFilter()
 {
 }
 
-bool LoggerFilter::apply_filter()
+bool LoggerFilter::apply_filter(uint16_t level)
 {
-    if ((log_level_ & LoggerLevel::TRACE) == LoggerLevel::TRACE)
+    if ((log_level_ & level) == LoggerLevel::TRACE)
     {
         return true;
     }
-    if ((log_level_ & LoggerLevel::INFO) == LoggerLevel::INFO)
+    if ((log_level_ & level) == LoggerLevel::INFO)
     {
         return true;
     }
-    if ((log_level_ & LoggerLevel::WARNING) == LoggerLevel::WARNING)
+    if ((log_level_ & level) == LoggerLevel::WARNING)
     {
         return true;
     }
-    if ((log_level_ & LoggerLevel::ERROR) == LoggerLevel::ERROR)
+    if ((log_level_ & level) == LoggerLevel::ERROR)
     {
         return true;
     }
-    if ((log_level_ & LoggerLevel::CRITICAL) == LoggerLevel::CRITICAL)
+    if ((log_level_ & level) == LoggerLevel::CRITICAL)
     {
         return true;
     }
 
     return false;
+}
+
+uint16_t LoggerFilter::get_log_filter_level()
+{
+    return log_level_;
 }

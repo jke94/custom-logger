@@ -42,9 +42,9 @@ void Logger::log(const char* file, const char* function, const int line, const s
 {
     mtx.lock();
 
-    bool apply_filter = logger_filter_->apply_filter();
-
-    // std::cout << "apply_filter: " << apply_filter << ", log_level: " << log_level << std::endl;
+    bool apply_filter = logger_filter_->apply_filter(log_level);
+ 
+    // std::cout << "get_log_filter_level: " << logger_filter_->get_log_filter_level() << ", apply_filter: " << apply_filter << ", log_level: " << log_level << std::endl;
 
     if(apply_filter)
     {
