@@ -1,33 +1,8 @@
-#include "logger_api.h"
-
 #include <iostream>
 #include <thread>
 #include <dlfcn.h>
 
-void write_log_trace(std::string msg)
-{
-    WRITE_TRACE(msg);
-}
-
-void write_log_info(std::string msg)
-{
-    WRITE_INFO(msg);
-}
-
-void write_log_warning(std::string msg)
-{
-    WRITE_WARNING(msg);
-}
-
-void write_log_error(std::string msg)
-{
-    WRITE_ERROR(msg);
-}
-
-void write_log_critical(std::string msg)
-{
-    WRITE_CRITICAL(msg);
-}
+#include "wrapper_lib_api.h"
 
 int main()
 {
@@ -53,12 +28,14 @@ int main()
 
     init_logger("application_2.log");
 
-    WRITE_TRACE("Hello Javi! Come on!");
+    WRITE_LOG_TRACE("Hello Javi! Come on!");
     
     const int n_threads = 100;
-    std::thread threads [n_threads] = {};
+    std::thread threads[n_threads] = {};
 
-    WRITE_TRACE("START!");
+    WRITE_LOG_INFO("START!");
+
+    WRITE_LOG_INFO("YUJUUUU!");
 
     for(int i=0; i<n_threads; i++)
     {
@@ -88,8 +65,12 @@ int main()
     {
         threads[i].join();
     }
-  
-    WRITE_TRACE("END!");
+    
+    WRITE_LOG_WARNING("Ups! We have a warning!");
+    WRITE_LOG_ERROR("Ey! It appears a error! :O");
+    WRITE_LOG_CRITICAL("Critical message!!!");
+
+    WRITE_LOG_TRACE("END!");
 
     end_logger();
 
