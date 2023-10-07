@@ -28,14 +28,14 @@ int main()
 
     init_logger("application_2.log");
 
-    WRITE_TRACE("Hello Javi! Come on!");
+    WRITE_LOG_TRACE("Hello Javi! Come on!");
     
     const int n_threads = 100;
     std::thread threads[n_threads] = {};
 
-    WRITE_TRACE("START!");
+    WRITE_LOG_INFO("START!");
 
-    WRITE_LOG_TRACE("YUJUUUU!");
+    WRITE_LOG_INFO("YUJUUUU!");
 
     for(int i=0; i<n_threads; i++)
     {
@@ -65,8 +65,12 @@ int main()
     {
         threads[i].join();
     }
-  
-    WRITE_TRACE("END!");
+    
+    WRITE_LOG_WARNING("Ups! We have a warning!");
+    WRITE_LOG_ERROR("Ey! It appears a error! :O");
+    WRITE_LOG_CRITICAL("Critical message!!!");
+
+    WRITE_LOG_TRACE("END!");
 
     end_logger();
 
