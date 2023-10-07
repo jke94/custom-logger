@@ -41,7 +41,7 @@ int main()
         {LoggerChannel::CRITICAL, "Message: Activated LoggerChannel::CRITICAL"}
     };
 
-    // EXAMPLE A: Selecting the log level channels that you want use.
+    // EXAMPLE A: Selecting the log level channels that you want to use.
 
     uint16_t sample_A_log_level = LoggerChannel::INFO | LoggerChannel::WARNING;
 
