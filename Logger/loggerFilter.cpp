@@ -1,4 +1,4 @@
-#include "loggerFilter.h"
+#include "pch.h"
 
 LoggerFilter::LoggerFilter()
 {
@@ -14,11 +14,11 @@ bool LoggerFilter::apply_filter(uint16_t level)
 
     switch(flag)
     {
-        case LoggerLevel::TRACE:
-        case LoggerLevel::INFO:
-        case LoggerLevel::WARNING:
-        case LoggerLevel::ERROR:
-        case LoggerLevel::CRITICAL:
+        case LoggerLevel::TRACE_CHANNEL:
+        case LoggerLevel::INFO_CHANNEL:
+        case LoggerLevel::WARNING_CHANNEL:
+        case LoggerLevel::ERROR_CHANNEL:
+        case LoggerLevel::CRITICAL_CHANNEL:
             return true;
         default:
             break;

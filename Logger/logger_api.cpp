@@ -1,5 +1,4 @@
-#include "logger_api.h"
-#include "logger.h"
+#include "pch.h"
 
 ILogger* logger = nullptr;
 

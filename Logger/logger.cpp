@@ -1,4 +1,4 @@
-#include "logger.h"
+#include "pch.h"
 
 std::mutex mtx;
 
@@ -15,27 +15,27 @@ Logger::~Logger()
 
 void Logger::log_trace(const char* file, const char* function, const int line, const std::string& msg)
 {
-    log(file, function, line, msg, LoggerLevel::TRACE);
+    log(file, function, line, msg, LoggerLevel::TRACE_CHANNEL);
 }
 
 void Logger::log_info(const char* file, const char* function, const int line, const std::string& msg)
 {
-    log(file, function, line, msg, LoggerLevel::INFO);
+    log(file, function, line, msg, LoggerLevel::INFO_CHANNEL);
 }
 
 void Logger::log_warning(const char* file, const char* function, const int line, const std::string& msg)
 {
-    log(file, function, line, msg, LoggerLevel::WARNING);
+    log(file, function, line, msg, LoggerLevel::WARNING_CHANNEL);
 }
 
 void Logger::log_error(const char* file, const char* function, const int line, const std::string& msg)
 {
-    log(file, function, line, msg, LoggerLevel::ERROR);
+    log(file, function, line, msg, LoggerLevel::ERROR_CHANNEL);
 }
 
 void Logger::log_critical(const char* file, const char* function, const int line, const std::string& msg)
 {
-    log(file, function, line, msg, LoggerLevel::CRITICAL);
+    log(file, function, line, msg, LoggerLevel::CRITICAL_CHANNEL);
 }
 
 void Logger::log(const char* file, const char* function, const int line, const std::string& msg, uint16_t log_level)
@@ -72,11 +72,16 @@ std::string Logger::date_and_time()
     const auto nowAsTimeT = std::chrono::system_clock::to_time_t(now);
     const auto nowMs = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()) % 1000;
     
-    std::stringstream nowSs;
-    nowSs << std::put_time(std::localtime(&nowAsTimeT), "%Y-%m-%d %X")
-        << '.' << std::setfill('0') << std::setw(3) << nowMs.count();
+    // TODO: Reimplement to be cross-platform code.
+    // 
+    // 
+    //  std::stringstream nowSs{};
+    //  nowSs << std::put_time(std::localtime(&nowAsTimeT), "%Y-%m-%d %X")
+    //      << '.' << std::setfill('0') << std::setw(3) << nowMs.count();
 
-  return nowSs.str();
+    //return nowSs.str();
+
+    return "[DATETIME][TODO]";
 }
 
 
@@ -86,19 +91,19 @@ std::string Logger::logger_level_to_str(uint16_t log_level)
 
     switch (log_level)
     {
-        case LoggerLevel::TRACE:
+        case LoggerLevel::TRACE_CHANNEL:
             value = "[TRACE]";
             break;
-        case LoggerLevel::INFO:
+        case LoggerLevel::INFO_CHANNEL:
             value = "[INFO]";
             break;
-        case LoggerLevel::WARNING:
+        case LoggerLevel::WARNING_CHANNEL:
             value = "[WARNING]";
             break;
-        case LoggerLevel::ERROR:
+        case LoggerLevel::ERROR_CHANNEL:
             value = "[ERROR]";
             break;
-        case LoggerLevel::CRITICAL:
+        case LoggerLevel::CRITICAL_CHANNEL:
             value = "[CRITICAL]";
             break;
         default:
