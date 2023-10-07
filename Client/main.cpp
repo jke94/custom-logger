@@ -26,7 +26,7 @@ int main()
         return -2;
     }
 
-    init_logger("application_2.log");
+    init_logger("application.log");
 
     WRITE_LOG_TRACE("Hello Javi! Come on!");
     
