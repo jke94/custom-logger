@@ -2,6 +2,14 @@
 
 A proof of concept about how to write a custom logger in C++ to be consumed by a client in delivered in dynamic library.
 
+Status:
+
+| Command | Description |
+| --- | --- |
+| Linux build | [![Linux build](https://github.com/jke94/custom-logger/actions/workflows/cmake.yml/badge.svg)](https://github.com/jke94/custom-logger/actions/workflows/cmake.yml) |
+| Docker Compose Builder | [![Docker Compose Builder](https://github.com/jke94/custom-logger/actions/workflows/dockercomposebuild.yml/badge.svg)](https://github.com/jke94/custom-logger/actions/workflows/dockercomposebuild.yml) |
+
+
 ## A. Docker compose (as linux builder and custom logger library client)
 
 - Linux:
