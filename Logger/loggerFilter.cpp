@@ -10,25 +10,18 @@ LoggerFilter::~LoggerFilter()
 
 bool LoggerFilter::apply_filter(uint16_t level)
 {
-    if ((log_level_ & level) == LoggerLevel::TRACE)
+    uint16_t flag = log_level_ & level;
+
+    switch(flag)
     {
-        return true;
-    }
-    if ((log_level_ & level) == LoggerLevel::INFO)
-    {
-        return true;
-    }
-    if ((log_level_ & level) == LoggerLevel::WARNING)
-    {
-        return true;
-    }
-    if ((log_level_ & level) == LoggerLevel::ERROR)
-    {
-        return true;
-    }
-    if ((log_level_ & level) == LoggerLevel::CRITICAL)
-    {
-        return true;
+        case LoggerLevel::TRACE:
+        case LoggerLevel::INFO:
+        case LoggerLevel::WARNING:
+        case LoggerLevel::ERROR:
+        case LoggerLevel::CRITICAL:
+            return true;
+        default:
+            break;
     }
 
     return false;

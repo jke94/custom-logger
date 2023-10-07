@@ -7,9 +7,9 @@
 class LoggerFilter : public ILoggerFilter
 {
     private:
-        uint16_t log_level_ = LoggerLevel::WARNING | LoggerLevel::TRACE;
+        uint16_t log_level_ = LoggerLevel::WARNING | LoggerLevel::CRITICAL;
     public:
-        LoggerFilter(/* args */);
+        LoggerFilter();
         ~LoggerFilter();
         bool apply_filter(uint16_t level) override;
         uint16_t get_log_filter_level() override;
