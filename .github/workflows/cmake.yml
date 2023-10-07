@@ -1,0 +1,32 @@
+name: Linux build
+
+on: push
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+            
+            - name: CMake version
+              run: cmake --version
+
+            - name: Make version
+              run: make --version
+
+            - name: Create build directory
+              run: mkdir build
+
+            - name: CMake
+              run: cmake ..
+              working-directory: ./build
+
+            - name: Run Makefile
+              run: make
+              working-directory: ./build
+
+            - name: Run program
+              run: ./main
+              working-directory: ./build
