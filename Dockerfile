@@ -9,9 +9,6 @@ COPY CMakeLists.txt /
 WORKDIR /build
 RUN cmake ..
 RUN make
-WORKDIR /build
-RUN cmake ..
-RUN make
 
 FROM ubuntu:latest
 RUN mkdir output

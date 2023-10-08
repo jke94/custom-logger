@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.22)
 
 project(demologger)
 
@@ -22,3 +22,17 @@ add_library(demologger STATIC ${LOGGER_SRC_FILES})
 add_executable(main ${CLIENT_SRC_FILES})
 
 target_link_libraries(main demologger)
+
+# Install libraries using NuGet Tool (TODO: Pending of investigate.)
+
+find_program(
+    NUGET_EXE NAMES nuget
+)
+exec_program(
+    ${NUGET_EXE} ARGS install "gtest" 
+    -Version 1.7.0 
+    -OutputDirectory ${CMAKE_BINARY_DIR}/packages
+)
+set_property(
+    TARGET ${PROJECT_NAME} PROPERTY VS_PACKAGE_REFERENCES "gtest"
+)
