@@ -1,31 +1,22 @@
 #include <iostream>
 #include <thread>
+
+#ifdef __linux__ 
+
 #include <dlfcn.h>
+
+#elif _WIN32
+
+#include <windows.h>
+
+#else
+
+#endif
 
 #include "wrapper_lib_api.h"
 
 int main()
 {
-    void* handle = dlopen("libdemologger.so", RTLD_LAZY);
-    
-    std::cout << "Handle: " << handle << std::endl;
-
-    if (!handle) 
-    {
-        std::cout << "Could not open the library 'libdemologger.so'" << std::endl;
-
-        return -1;
-    }
-
-    INIT_LOGGER init_logger = reinterpret_cast<INIT_LOGGER>(dlsym(handle, "init_logger"));
-    END_LOGGER end_logger = reinterpret_cast<END_LOGGER>(dlsym(handle, "end_logger"));
-
-    if(!init_logger && !end_logger)
-    {
-        std::cout << "Error in load function." << std::endl;
-        return -2;
-    }
-
     init_logger("application.log");
 
     WRITE_LOG_TRACE("Hello Javi! Come on!");
@@ -73,8 +64,6 @@ int main()
     WRITE_LOG_TRACE("END!");
 
     end_logger();
-
-    dlclose(handle);
 
     return 0;
 }

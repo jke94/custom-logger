@@ -1,4 +1,5 @@
 #include "pch.h"
+#include <sstream> 
 
 std::mutex mtx;
 
@@ -72,16 +73,27 @@ std::string Logger::date_and_time()
     const auto nowAsTimeT = std::chrono::system_clock::to_time_t(now);
     const auto nowMs = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()) % 1000;
     
-    // TODO: Reimplement to be cross-platform code.
-    // 
-    // 
-    //  std::stringstream nowSs{};
-    //  nowSs << std::put_time(std::localtime(&nowAsTimeT), "%Y-%m-%d %X")
-    //      << '.' << std::setfill('0') << std::setw(3) << nowMs.count();
+    std::stringstream nowSs{};
+      
+#if defined(_WIN32) || defined(__CYGWIN__)
 
-    //return nowSs.str();
+    time_t rawtime = std::time(nullptr);
+    struct tm timeinfo;
+    auto lc_time =  localtime_s(&timeinfo, &rawtime);
 
-    return "[DATETIME][TODO]";
+    nowSs << std::put_time(&timeinfo, "%Y-%m-%d %X")
+    << '.' << std::setfill('0') << std::setw(3) << nowMs.count();
+
+#elif defined(__linux__)
+
+    nowSs << std::put_time(std::localtime(&nowAsTimeT), "%Y-%m-%d %X")
+        << '.' << std::setfill('0') << std::setw(3) << nowMs.count();
+#else
+    #error Unknown environment!
+    nowSs << "[ERROR_GET_TIME]";
+#endif
+
+    return nowSs.str();
 }
 
 
