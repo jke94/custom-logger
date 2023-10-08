@@ -1,7 +1,8 @@
 #include "pch.h"
 
-LoggerFilter::LoggerFilter()
+LoggerFilter::LoggerFilter(uint16_t log_level)
 {
+    log_level_ = log_level;
 }
 
 LoggerFilter::~LoggerFilter()

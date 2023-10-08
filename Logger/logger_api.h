@@ -1,3 +1,5 @@
+#pragma once
+
 #include <cstring>
 #include <string>
 
@@ -6,10 +8,19 @@
 #elif defined(__linux__)
 	#define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
 #else
-	#error Unknown environment!
+	#error Ey! Unknown environment!
 #endif
 
-void init_logger(std::string log_file_name);
+enum LoggerLevel : uint16_t
+{
+    TRACE_CHANNEL       = 0x0001,   // 2^0      1
+    INFO_CHANNEL        = 0x0002,   // 2^1      2
+    WARNING_CHANNEL     = 0x0004,   // 2^2      4
+    ERROR_CHANNEL       = 0x0008,   // 2^3      8
+    CRITICAL_CHANNEL    = 0x0010    // 2^4      16
+};
+
+void init_logger(std::string log_file_name, uint16_t log_channel);
 void end_logger();
 
 void log_trace(const char* file, const char* function, const int line, const std::string& msg);

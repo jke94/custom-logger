@@ -12,16 +12,19 @@
 
 int main()
 {
-    init_logger("application.log");
+    // Set the log channels that you want use.
+    uint16_t log_channels = LoggerLevel::TRACE_CHANNEL | LoggerLevel::INFO_CHANNEL;
+
+    init_logger("application.log", log_channels);
 
     WRITE_LOG_TRACE("Hello Javi! Come on!");
-    
-    const int n_threads = 100;
-    std::thread threads[n_threads] = {};
 
     WRITE_LOG_INFO("START!");
 
     WRITE_LOG_INFO("YUJUUUU!");
+
+    const int n_threads = 100;
+    std::thread threads[n_threads] = {};
 
     for(int i=0; i<n_threads; i++)
     {

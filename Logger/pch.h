@@ -6,7 +6,6 @@
 #include "ILogger.h"
 #include "ILoggerFilter.h"
 #include "logger.h"
-#include "LoggerLevel.h"
 #include "loggerFilter.h"
 
 #endif //PCH_H

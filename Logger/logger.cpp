@@ -3,10 +3,10 @@
 
 std::mutex mtx;
 
-Logger::Logger(std::string log_file_name)
+Logger::Logger(std::string log_file_name, uint16_t log_channel)
 {
     log_file_name_ = log_file_name;
-    logger_filter_ = new LoggerFilter();
+    logger_filter_ = new LoggerFilter(log_channel);
 }
 
 Logger::~Logger()

@@ -2,9 +2,9 @@
 
 ILogger* logger = nullptr;
 
-void init_logger(std::string log_file_name)
+void init_logger(std::string log_file_name, uint16_t log_channel)
 {
-    logger = new Logger(log_file_name);
+    logger = new Logger(log_file_name, log_channel);
 }
 
 void end_logger()

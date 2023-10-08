@@ -1,13 +1,13 @@
 #pragma once
 #include <iostream>
-#include "LoggerLevel.h"
+#include "logger_api.h"
 
 class LoggerFilter : public ILoggerFilter
 {
     private:
-        uint16_t log_level_ = LoggerLevel::WARNING_CHANNEL | LoggerLevel::CRITICAL_CHANNEL;
+        uint16_t log_level_;
     public:
-        LoggerFilter();
+        LoggerFilter(uint16_t log_level);
         ~LoggerFilter();
         bool apply_filter(uint16_t level) override;
         uint16_t get_log_filter_level() override;
