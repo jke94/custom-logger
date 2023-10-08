@@ -1,3 +1,8 @@
+/**
+ *  Summary: C++ logger with channels through bitmask operations.
+ *  Github author: https://github.com/jke94
+*/
+
 #include <iostream>
 #include <map>
 
