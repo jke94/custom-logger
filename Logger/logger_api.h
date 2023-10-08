@@ -1,15 +1,16 @@
-// #pragma once
-
 #include <cstring>
 #include <string>
 
-typedef void (*INIT_LOGGER)(std::string msg);
+#if defined(_WIN32) || defined(__CYGWIN__)
+	#define __FILENAME__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
+#elif defined(__linux__)
+	#define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
+#else
+	#error Unknown environment!
+#endif
+
 void init_logger(std::string log_file_name);
-
-typedef void (*END_LOGGER)();
 void end_logger();
-
-#define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
 
 void log_trace(const char* file, const char* function, const int line, const std::string& msg);
 #define WRITE_TRACE(msg) log_trace( __FILENAME__, __FUNCTION__, __LINE__ , msg)

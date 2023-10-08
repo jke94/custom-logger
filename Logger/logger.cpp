@@ -89,7 +89,6 @@ std::string Logger::date_and_time()
     nowSs << std::put_time(std::localtime(&nowAsTimeT), "%Y-%m-%d %X")
         << '.' << std::setfill('0') << std::setw(3) << nowMs.count();
 #else
-    #error Unknown environment!
     nowSs << "[ERROR_GET_TIME]";
 #endif
 

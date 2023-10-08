@@ -1,18 +1,13 @@
-#include <iostream>
-#include <thread>
-
-#ifdef __linux__ 
-
-#include <dlfcn.h>
-
-#elif _WIN32
-
-#include <windows.h>
-
+#if defined(_WIN32) || defined(__CYGWIN__)
+    #include <windows.h>
+#elif defined(__linux__)
+    #include <dlfcn.h>
 #else
-
+    #include <dlfcn.h>
 #endif
 
+#include <iostream>
+#include <thread>
 #include "wrapper_lib_api.h"
 
 int main()
