@@ -12,7 +12,11 @@
 
 int main()
 {
-    init_logger("application.log");
+    // Set the log channels that you want use.
+    // TODO: Future, read from config file.
+    uint16_t log_channels = LoggerLevel::TRACE_CHANNEL | LoggerLevel::INFO_CHANNEL;
+
+    init_logger("application.log", log_channels);
 
     WRITE_LOG_TRACE("Hello Javi! Come on!");
     

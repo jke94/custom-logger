@@ -23,7 +23,7 @@ class Logger : public ILogger
 
     public:
 
-        Logger(std::string log_file_name);
+        Logger(std::string log_file_name, uint16_t log_channel);
         ~Logger();
         
         void log_trace(const char* file, const char* function, const int line, const std::string& msg);
