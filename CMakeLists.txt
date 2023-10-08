@@ -17,7 +17,7 @@ include_directories(
     Logger
 )
 
-add_library(demologger SHARED ${LOGGER_SRC_FILES})
+add_library(demologger STATIC ${LOGGER_SRC_FILES})
 
 add_executable(main ${CLIENT_SRC_FILES})
 
