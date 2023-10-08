@@ -33,14 +33,12 @@ int main()
 
     return 0;
 }
-
 ```
 The **application.log** file will be created will a content similar like this:
 
 ```
 2023-10-08 16:45:18.718 | [TRACE] | [main.cpp:main:18] This message wtriten in TRACE channel.
 2023-10-08 16:45:18.719 | [INFO] | [main.cpp:main:19] This message wtriten in INFO channel.
-
 ```
 
 ## B. Docker compose (as linux builder and custom logger library client)
