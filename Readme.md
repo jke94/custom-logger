@@ -62,3 +62,6 @@ docker-compose -f ./docker-compose.yml -p custom-logger-lib up --build
 - [Improving Print Logging with Line Pos Info & Modern C+](https://www.cppstories.com/2019/04/file-pos-log/)
 
 - [What are __FILE__, __LINE__, and __FUNCTION__ in C++](https://www.tutorialspoint.com/what-are-file-line-and-function-in-cplusplus)
+
+Useful info to install NuGet package using CMake.
+- [A bit of C++ and CMake linking help, please](https://community.gigperformer.com/t/a-bit-of-c-and-cmake-linking-help-please/11710)
