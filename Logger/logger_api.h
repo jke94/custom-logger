@@ -1,5 +1,15 @@
 #pragma once
 
+#if defined(_WIN32)
+    #define LIBRARY_API __declspec(dllexport)
+#elif defined(__GNUC__)
+    #define LIBRARY_API __attribute__((visibility("default")))
+#else
+    #define EXPORT
+    #define IMPORT
+    #pragma warning Unknown dynamic link import/export semantics.
+#endif
+
 #include <cstring>
 #include <string>
 
