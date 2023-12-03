@@ -1,6 +1,6 @@
 # Custom logger
 
-A proof of concept about how to write a custom logger in C++ to be consumed by a client in delivered in static library.
+A proof of concept about how to write a custom logger in C++ to be consumed by a client in delivered in dynamic library with implicit linking.
 
 Status:
 
