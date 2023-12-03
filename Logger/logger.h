@@ -6,7 +6,6 @@
 #include <thread>
 #include <fstream>
 
-#include "ILogger.h"
 #include "logger_api.h"
 #include "loggerFilter.h"
 

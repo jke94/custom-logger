@@ -1,18 +1,19 @@
-#include "pch.h"
+#include "logger_api.h"
+#include "logger.h"
 
 ILogger* logger = nullptr;
 
-void init_logger(std::string log_file_name, uint16_t log_channel)
+LOGGER_API void init_logger(std::string log_file_name, uint16_t log_channel)
 {
     logger = new Logger(log_file_name, log_channel);
 }
 
-void end_logger()
+LOGGER_API void end_logger()
 {
     logger = nullptr;
 }
 
-void log_trace(const char* file, const char* function, const int line, const std::string& msg)
+LOGGER_API void log_trace_def(const char* file, const char* function, const int line, const std::string& msg)
 {
     if(logger)
     {
@@ -20,7 +21,7 @@ void log_trace(const char* file, const char* function, const int line, const std
     }    
 }
 
-void log_info(const char* file, const char* function, const int line, const std::string& msg)
+LOGGER_API void log_info_def(const char* file, const char* function, const int line, const std::string& msg)
 {
     if(logger)
     {
@@ -28,7 +29,7 @@ void log_info(const char* file, const char* function, const int line, const std:
     }
 }
 
-void log_warning(const char* file, const char* function, const int line, const std::string& msg)
+LOGGER_API void log_warning_def(const char* file, const char* function, const int line, const std::string& msg)
 {
     if(logger)
     {
@@ -36,7 +37,7 @@ void log_warning(const char* file, const char* function, const int line, const s
     } 
 }
 
-void log_error(const char* file, const char* function, const int line, const std::string& msg)
+LOGGER_API void log_error_def(const char* file, const char* function, const int line, const std::string& msg)
 {
     if(logger)
     {
@@ -44,7 +45,7 @@ void log_error(const char* file, const char* function, const int line, const std
     } 
 }
 
-void log_critical(const char* file, const char* function, const int line, const std::string& msg)
+LOGGER_API void log_critical_def(const char* file, const char* function, const int line, const std::string& msg)
 {
     if(logger)
     {
