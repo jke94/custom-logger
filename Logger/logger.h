@@ -8,6 +8,7 @@
 
 #include "logger_api.h"
 #include "loggerFilter.h"
+#include "ILogger.h"
 
 class Logger : public ILogger
 {

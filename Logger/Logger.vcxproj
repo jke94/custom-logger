@@ -164,6 +164,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
+    <ClInclude Include="ILogger.h" />
     <ClInclude Include="ILoggerFilter.h" />
     <ClInclude Include="logger.h" />
     <ClInclude Include="loggerFilter.h" />

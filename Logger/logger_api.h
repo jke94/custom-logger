@@ -21,17 +21,6 @@
 	#error Ey! Unknown environment!
 #endif
 
-class ILogger
-{
-public:
-
-    virtual void log_trace(const char* file, const char* function, const int line, const std::string& msg) = 0;
-    virtual void log_info(const char* file, const char* function, const int line, const std::string& msg) = 0;
-    virtual void log_warning(const char* file, const char* function, const int line, const std::string& msg) = 0;
-    virtual void log_error(const char* file, const char* function, const int line, const std::string& msg) = 0;
-    virtual void log_critical(const char* file, const char* function, const int line, const std::string& msg) = 0;
-};
-
 enum LoggerLevel : uint16_t
 {
     TRACE_CHANNEL       = 0x0001,   // 2^0      1
