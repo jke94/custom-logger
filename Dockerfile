@@ -12,7 +12,7 @@ RUN make
 
 FROM ubuntu:latest
 RUN mkdir output
-COPY --from=builder /build/libdemologger.a /usr/lib
+COPY --from=builder libdemologger.so /usr/lib
 COPY --from=builder /build/main /output
 WORKDIR /output
 CMD ["./main"]
