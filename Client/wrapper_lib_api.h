@@ -11,7 +11,7 @@
 
 void write_log_trace(std::string msg)
 {
-    WRITE_LOG_INFO(msg);
+    WRITE_LOG_TRACE(msg);
 }
 
 void write_log_info(std::string msg)
