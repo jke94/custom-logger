@@ -1,4 +1,3 @@
-#include <iostream>
 #include <string>
 
 #include "logger_api.h"
@@ -12,7 +11,7 @@
 
 void write_log_trace(std::string msg)
 {
-    WRITE_LOG_TRACE(msg);
+    WRITE_LOG_INFO(msg);
 }
 
 void write_log_info(std::string msg)
