@@ -18,22 +18,16 @@
     <ClInclude Include="framework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LoggerLevel.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
     <ClInclude Include="loggerFilter.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
     <ClInclude Include="logger_api.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="logger.h">
+    <ClInclude Include="ILoggerFilter.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="ILoggerFilter.h">
+    <ClInclude Include="logger.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
     <ClInclude Include="ILogger.h">
@@ -50,5 +44,13 @@
     <ClCompile Include="loggerFilter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Logger.def">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

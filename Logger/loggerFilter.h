@@ -1,6 +1,8 @@
 #pragma once
+
 #include <iostream>
 #include "logger_api.h"
+#include "ILoggerFilter.h"
 
 class LoggerFilter : public ILoggerFilter
 {
